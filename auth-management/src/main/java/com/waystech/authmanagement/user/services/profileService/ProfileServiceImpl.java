@@ -1,20 +1,19 @@
-package org.partypal.userManagement.domain.services.profileService;
+package com.waystech.authmanagement.user.services.profileService;
 
 
 import com.google.gson.Gson;
+import com.waystech.authmanagement.Utils.UserUtils;
+import com.waystech.authmanagement.exceptions.classes.InvalidCredentialsException;
+import com.waystech.authmanagement.exceptions.classes.ProfileUpdateException;
+import com.waystech.authmanagement.exceptions.classes.UserAlreadyExistException;
+import com.waystech.authmanagement.integrations.cloudinaryService.services.CloudinaryServices;
+import com.waystech.authmanagement.user.dto.NovaResponse;
+import com.waystech.authmanagement.user.dto.request.EditProfileRequest;
+import com.waystech.authmanagement.user.dto.response.ProfileResponse;
+import com.waystech.authmanagement.user.models.User;
+import com.waystech.authmanagement.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.partypal.commonModule.exceptions.classes.InvalidCredentialsException;
-import org.partypal.commonModule.exceptions.classes.ProfileUpdateException;
-import org.partypal.commonModule.exceptions.classes.UserAlreadyExistException;
-import org.partypal.commonModule.utils.DateUtils;
-import org.partypal.commonModule.utils.UserUtils;
-import org.partypal.thirdPartyService.cloudinaryService.services.CloudinaryServices;
-import org.partypal.userManagement.application.dto.PartyPalResponse;
-import org.partypal.userManagement.application.dto.request.EditProfileRequest;
-import org.partypal.userManagement.application.dto.response.ProfileResponse;
-import org.partypal.userManagement.domain.models.User;
-import org.partypal.userManagement.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +28,7 @@ public class ProfileServiceImpl implements ProfileService{
     public static final Gson gson = new Gson();
 
     @Override
-    public PartyPalResponse<String> uploadProfile(MultipartFile image, String username, String location){
+    public NovaResponse<String> uploadProfile(MultipartFile image, String username, String location){
         User user = userUtils.getUserFromContext();
         String imageUrl;
         if(image != null){
@@ -42,14 +41,14 @@ public class ProfileServiceImpl implements ProfileService{
         user.setLocation(location);
         User theUser = userRepository.save(user);
         if(theUser.getUsername() != null){
-            return new PartyPalResponse<>("Request Processed", "Profile Updated Successfully");
+            return new NovaResponse<>("Request Processed", "Profile Updated Successfully");
         }else{
             throw new ProfileUpdateException("Error encountered, Please Try again");
         }
     }
 
     @Override
-    public PartyPalResponse<ProfileResponse> editProfile(MultipartFile image, String details){
+    public NovaResponse<ProfileResponse> editProfile(MultipartFile image, String details){
         EditProfileRequest request;
         try{
             request = gson.fromJson(details, EditProfileRequest.class);
@@ -73,20 +72,20 @@ public class ProfileServiceImpl implements ProfileService{
         user.setLocation(request.getLocation());
         user.setImageUrl(imageUrl);
         User theUser = userRepository.save(user);
-        return new PartyPalResponse<>("Profile Updated Successfully", new ProfileResponse(theUser));
+        return new NovaResponse<>("Profile Updated Successfully", new ProfileResponse(theUser));
     }
 
     @Override
-    public PartyPalResponse<ProfileResponse> getLoggedInProfile(){
+    public NovaResponse<ProfileResponse> getLoggedInProfile(){
         User user = userUtils.getUserFromContext();
-        return new PartyPalResponse<>("Profile Updated Successfully", new ProfileResponse(user));
+        return new NovaResponse<>("Profile Updated Successfully", new ProfileResponse(user));
     }
 
     @Override
-    public PartyPalResponse<String> deleteAccount(){
+    public NovaResponse<String> deleteAccount(){
         User user = userUtils.getUserFromContext();
         userRepository.delete(user);
-        return new PartyPalResponse<>
+        return new NovaResponse<>
                 ("Request Processed", "Account with email: "+user.getEmail()+" is deleted successfully");
     }
 

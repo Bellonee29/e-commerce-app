@@ -1,25 +1,26 @@
-package org.partypal.userManagement.domain.services.deleteService;
+package com.waystech.authmanagement.user.services.deleteService;
 
+import com.waystech.authmanagement.exceptions.classes.UserNotFoundException;
+import com.waystech.authmanagement.user.models.User;
+import com.waystech.authmanagement.user.repository.OtpRepository;
+import com.waystech.authmanagement.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.partypal.commonModule.exceptions.classes.UserNotFoundException;
-import org.partypal.userManagement.domain.models.User;
-import org.partypal.userManagement.domain.repository.OtpRepository;
-import org.partypal.userManagement.domain.repository.UserRepository;
-import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
-import org.springframework.data.mongodb.core.mapping.event.BeforeDeleteEvent;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class DeleteUserService extends AbstractMongoEventListener<User> {
+public class DeleteUserService {
+
     private final OtpRepository otpRepository;
     private final UserRepository userRepository;
 
-    @Override
-    public void onBeforeDelete(BeforeDeleteEvent<User> event) {
-        String userId = event.getSource().get("_id").toString();
+    @Transactional
+    public void onBeforeDelete(String userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
         otpRepository.deleteByUser(user);
+        userRepository.delete(user);
     }
 }

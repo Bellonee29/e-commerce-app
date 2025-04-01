@@ -3,3 +3,65 @@ spring:
     name: auth-management
   config:
     import: optional:configserver:http://localhost:8888
+#Email
+server:
+  mail:
+    host: smtp-relay.brevo.com
+    port: 587
+    username: ${SMTP-USERNAME}
+    password: ${SMTP-PASSWORD}
+
+  #   Messaging Queue Rabbit MQ
+  rabbitmq:
+    host: ${RABBIT-HOST}
+    port: 5671
+    username: ${RABBIT-USERNAME}
+    password: ${RABBIT-PASSWORD}
+    virtual-host: ${RABBIT-USERNAME}
+    ssl:
+      enabled: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: retry, circuitbreakers
+  endpoint:
+    health:
+      show-details: always
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  retry:
+    instances:
+      PARTY-PAL-MVP:
+        max-attempts: 3
+        wait-duration: 2s
+
+company:
+  name: ${COMPANY-NAME}
+
+application:
+  access-key: ${ACCESS-KEY}
+
+#JWT
+jwt:
+  access-expiration: ${JWT-TOKEN}
+  refresh-expiration: ${JWT-REFRESH}
+
+cloud:
+  name: ${CLOUDINARY-NAME}
+  secret: ${CLOUDINARY-SECRET}
+  key: ${CLOUDINARY-KEY}
+
+brevo:
+  base:
+    url: ${BASE-URL}
+  access:
+    key: ${BREVO-API-KEY}
+
+connection:
+  time:
+    out: 10

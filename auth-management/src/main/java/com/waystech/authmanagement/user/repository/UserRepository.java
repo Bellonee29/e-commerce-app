@@ -1,13 +1,13 @@
-package org.partypal.userManagement.domain.repository;
+package com.waystech.authmanagement.user.repository;
 
-import org.partypal.userManagement.domain.models.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.waystech.authmanagement.user.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByEmail(String userEmail);
 
     boolean existsByEmailOrPhoneNumber(String email, String phoneNumber);

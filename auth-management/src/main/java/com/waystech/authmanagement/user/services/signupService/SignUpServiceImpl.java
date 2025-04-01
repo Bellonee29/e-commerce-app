@@ -1,18 +1,18 @@
-package org.partypal.userManagement.domain.services.signupService;
+package com.waystech.authmanagement.user.services.signupService;
 
+import com.waystech.authmanagement.Utils.OtpGenerator;
+import com.waystech.authmanagement.emailNotification.events.EmailEvent;
+import com.waystech.authmanagement.emailNotification.models.EmailModels;
+import com.waystech.authmanagement.exceptions.classes.UserAlreadyExistException;
+import com.waystech.authmanagement.integrations.asyncService.services.registrationService.AsyncRegistrationService;
+import com.waystech.authmanagement.user.dto.NovaResponse;
+import com.waystech.authmanagement.user.dto.request.SignUpRequest;
+import com.waystech.authmanagement.user.dto.response.SignUpResponse;
+import com.waystech.authmanagement.user.dto.response.UserDto;
+import com.waystech.authmanagement.user.enums.Role;
+import com.waystech.authmanagement.user.models.User;
+import com.waystech.authmanagement.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.partypal.thirdPartyService.asyncService.services.registrationService.AsyncRegistrationService;
-import org.partypal.userManagement.application.dto.PartyPalResponse;
-import org.partypal.userManagement.application.dto.request.SignUpRequest;
-import org.partypal.userManagement.application.dto.response.SignUpResponse;
-import org.partypal.commonModule.exceptions.classes.UserAlreadyExistException;
-import org.partypal.emailNotification.events.EmailEvent;
-import org.partypal.emailNotification.models.EmailModels;
-import org.partypal.commonModule.utils.OtpGenerator;
-import org.partypal.userManagement.application.dto.response.UserDto;
-import org.partypal.userManagement.domain.enums.Role;
-import org.partypal.userManagement.domain.models.User;
-import org.partypal.userManagement.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class SignUpServiceImpl implements SignUpService{
     private final AsyncRegistrationService asyncRegistrationService;
 
     @Override
-    public PartyPalResponse<SignUpResponse> registerUser(SignUpRequest request){
+    public NovaResponse<SignUpResponse> registerUser(SignUpRequest request){
         if(userRepository.existsByEmailOrPhoneNumber
                 (request.getEmail(), request.getPhoneNumber())){
             throw new UserAlreadyExistException("User is already registered, Proceed to login");
@@ -33,19 +33,22 @@ public class SignUpServiceImpl implements SignUpService{
                         .firstname(request.getFirstname())
                         .lastname(request.getLastname())
                         .email(request.getEmail())
+                        .state(request.getState())
+                        .address(request.getAddress())
+                        .country(request.getCountry())
                         .phoneNumber(request.getPhoneNumber())
                         .password(passwordEncoder.encode(request.getPassword()))
                         .isVerified(false)
                         .role(Role.valueOf(request.getUserType().toUpperCase()))
                 .build());
         String otpString = OtpGenerator.generateOtpString();
-        String emailContent = EmailModels.OTP_REGISTRATION(user.getFirstname(), "PARTY PAL", otpString);
+        String emailContent = EmailModels.OTP_REGISTRATION(user.getFirstname(), "Nova", otpString);
         EmailEvent emailEvent = new EmailEvent(new UserDto(user), "OTP Verification", emailContent, otpString);
         asyncRegistrationService.queueRegistrationMail(emailEvent);
         SignUpResponse response = SignUpResponse.builder()
                 .id(user.getUserId())
                 .email(user.getEmail())
                 .build();
-        return new PartyPalResponse<>("User registered successfully", response);
+        return new NovaResponse<>("User registered successfully", response);
     }
 }

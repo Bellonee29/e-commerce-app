@@ -1,4 +1,4 @@
-package org.partypal.commonModule.events;
+package com.waystech.authmanagement.emailNotification.events;
 
 import lombok.Getter;
 import lombok.Setter;

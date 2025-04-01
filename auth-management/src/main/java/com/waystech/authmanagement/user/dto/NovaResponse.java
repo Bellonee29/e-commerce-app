@@ -5,7 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class PartyPalResponse<T>{
+public class NovaResponse<T>{
     private String message;
     private T data;
 }

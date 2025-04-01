@@ -1,4 +1,4 @@
-package org.partypal.commonModule.exceptions.classes;
+package com.waystech.authmanagement.exceptions.classes;
 
 public class OtpExpiredException extends RuntimeException{
     public OtpExpiredException(String message) {

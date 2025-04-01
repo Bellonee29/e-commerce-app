@@ -1,8 +1,8 @@
-package org.partypal.emailNotification.events;
+package com.waystech.authmanagement.emailNotification.events;
 
+import com.waystech.authmanagement.user.dto.response.UserDto;
 import lombok.Getter;
 import lombok.Setter;
-import org.partypal.userManagement.application.dto.response.UserDto;
 
 @Getter
 @Setter

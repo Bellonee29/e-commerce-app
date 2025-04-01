@@ -1,11 +1,11 @@
-package org.partypal.userManagement.application.dto.response;
+package com.waystech.authmanagement.user.dto.response;
 
+import com.waystech.authmanagement.user.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.partypal.userManagement.domain.models.User;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -20,10 +20,11 @@ public class ProfileResponse {
     private String username;
     private Date birthday;
     private String location;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+    private String modifiedBy;
     private String imageUrl;
     private String role;
-    private Date createdDate;
-    private Date updatedAt;
 
     public ProfileResponse(User user){
         this.id = user.getUserId();
@@ -35,7 +36,8 @@ public class ProfileResponse {
         this.location = user.getLocation();
         this.imageUrl = user.getImageUrl();
         this.role = user.getRole().name();
-        this.createdDate = user.getDateCreated();
-        this.updatedAt = user.getUpdatedAt();
+        this.createdAt = user.getCreatedAt();
+        this.modifiedAt = user.getModifiedAt();
+        this.modifiedBy = user.getModifiedBy();
     }
 }

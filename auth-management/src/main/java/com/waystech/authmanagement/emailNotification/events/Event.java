@@ -1,10 +1,11 @@
-package org.partypal.commonModule.events;
+package com.waystech.authmanagement.emailNotification.events;
 
+import com.waystech.authmanagement.Utils.DateUtils;
+import com.waystech.authmanagement.user.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.partypal.commonModule.utils.DateUtils;
-import org.partypal.userManagement.domain.models.User;
+
 
 import java.time.LocalDateTime;
 import java.util.UUID;

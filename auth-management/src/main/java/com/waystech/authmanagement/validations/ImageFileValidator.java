@@ -1,4 +1,4 @@
-package org.partypal.commonModule.validations;
+package com.waystech.authmanagement.validations;
 
 import org.partypal.commonModule.exceptions.classes.CustomValidationException;
 import org.springframework.web.multipart.MultipartFile;

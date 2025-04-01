@@ -1,19 +1,19 @@
-package org.partypal.userManagement.domain.services.passwordService;
+package com.waystech.authmanagement.user.services.passwordService;
 
+import com.waystech.authmanagement.Utils.OtpGenerator;
+import com.waystech.authmanagement.emailNotification.events.EmailEvent;
+import com.waystech.authmanagement.emailNotification.models.EmailModels;
+import com.waystech.authmanagement.exceptions.classes.InvalidCredentialsException;
+import com.waystech.authmanagement.exceptions.classes.UserNotFoundException;
+import com.waystech.authmanagement.exceptions.classes.UserUnauthorizedException;
+import com.waystech.authmanagement.integrations.asyncService.services.registrationService.AsyncRegistrationService;
+import com.waystech.authmanagement.user.dto.NovaResponse;
+import com.waystech.authmanagement.user.dto.request.ForgotPasswordRequest;
+import com.waystech.authmanagement.user.dto.response.SignUpResponse;
+import com.waystech.authmanagement.user.dto.response.UserDto;
+import com.waystech.authmanagement.user.models.User;
+import com.waystech.authmanagement.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.partypal.commonModule.exceptions.classes.UserUnauthorizedException;
-import org.partypal.thirdPartyService.asyncService.services.registrationService.AsyncRegistrationService;
-import org.partypal.userManagement.application.dto.PartyPalResponse;
-import org.partypal.userManagement.application.dto.request.ForgotPasswordRequest;
-import org.partypal.userManagement.application.dto.response.SignUpResponse;
-import org.partypal.commonModule.exceptions.classes.InvalidCredentialsException;
-import org.partypal.commonModule.exceptions.classes.UserNotFoundException;
-import org.partypal.emailNotification.events.EmailEvent;
-import org.partypal.emailNotification.models.EmailModels;
-import org.partypal.commonModule.utils.OtpGenerator;
-import org.partypal.userManagement.application.dto.response.UserDto;
-import org.partypal.userManagement.domain.models.User;
-import org.partypal.userManagement.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class PasswordServiceImpl implements PasswordService{
     private final AsyncRegistrationService asyncRegistrationService;
     private final PasswordEncoder passwordEncoder;
     @Override
-    public PartyPalResponse<SignUpResponse> forgotPassword(String email){
+    public NovaResponse<SignUpResponse> forgotPassword(String email){
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()-> new UserNotFoundException("User does not exist"));
         if(!user.getIsVerified()){
@@ -39,11 +39,11 @@ public class PasswordServiceImpl implements PasswordService{
                 .id(user.getUserId())
                 .email(user.getEmail())
                 .build();
-        return new PartyPalResponse<>("Successful, Check your mail for reset OTP", signUpResponse);
+        return new NovaResponse<>("Successful, Check your mail for reset OTP", signUpResponse);
     }
 
     @Override
-    public PartyPalResponse<String> resetPassword(ForgotPasswordRequest request){
+    public NovaResponse<String> resetPassword(ForgotPasswordRequest request){
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(()-> new UserNotFoundException("User does not exist"));
         if(passwordEncoder.matches(request.getNewPassword(), user.getPassword())){
@@ -51,6 +51,6 @@ public class PasswordServiceImpl implements PasswordService{
         }
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
-        return new PartyPalResponse<>("Request Processed", "Password Changed Successfully");
+        return new NovaResponse<>("Request Processed", "Password Changed Successfully");
     }
 }

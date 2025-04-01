@@ -1,4 +1,4 @@
-package org.partypal.commonModule.validations;
+package com.waystech.authmanagement.validations;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

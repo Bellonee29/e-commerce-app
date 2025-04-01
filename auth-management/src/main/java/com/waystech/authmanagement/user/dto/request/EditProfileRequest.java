@@ -1,4 +1,4 @@
-package org.partypal.userManagement.application.dto.request;
+package com.waystech.authmanagement.user.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

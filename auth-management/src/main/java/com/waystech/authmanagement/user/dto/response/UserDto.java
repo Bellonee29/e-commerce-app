@@ -1,10 +1,10 @@
-package org.partypal.userManagement.application.dto.response;
+package com.waystech.authmanagement.user.dto.response;
 
+import com.waystech.authmanagement.user.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.partypal.userManagement.domain.models.User;
 
 @AllArgsConstructor
 @NoArgsConstructor

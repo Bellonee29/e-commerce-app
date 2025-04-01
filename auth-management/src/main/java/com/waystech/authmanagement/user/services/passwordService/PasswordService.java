@@ -1,13 +1,14 @@
-package org.partypal.userManagement.domain.services.passwordService;
+package com.waystech.authmanagement.user.services.passwordService;
 
-import org.partypal.userManagement.application.dto.PartyPalResponse;
-import org.partypal.userManagement.application.dto.request.ForgotPasswordRequest;
-import org.partypal.userManagement.application.dto.response.SignUpResponse;
+
+import com.waystech.authmanagement.user.dto.NovaResponse;
+import com.waystech.authmanagement.user.dto.request.ForgotPasswordRequest;
+import com.waystech.authmanagement.user.dto.response.SignUpResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface PasswordService {
-    PartyPalResponse<SignUpResponse> forgotPassword(String email);
+    NovaResponse<SignUpResponse> forgotPassword(String email);
 
-    PartyPalResponse<String> resetPassword(ForgotPasswordRequest request);
+    NovaResponse<String> resetPassword(ForgotPasswordRequest request);
 }

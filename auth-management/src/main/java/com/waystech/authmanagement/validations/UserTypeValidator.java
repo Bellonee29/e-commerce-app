@@ -1,8 +1,8 @@
-package org.partypal.commonModule.validations;
+package com.waystech.authmanagement.validations;
 
+import com.waystech.authmanagement.exceptions.classes.CustomValidationException;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.partypal.commonModule.exceptions.classes.CustomValidationException;
 
 public class UserTypeValidator implements ConstraintValidator<ValidUserType, String> {
     @Override

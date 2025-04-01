@@ -1,4 +1,4 @@
-package org.partypal.commonModule.validations;
+package com.waystech.authmanagement.validations;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface ValidUserType {
 
-    String message() default "User type must be user or promoter";
+    String message() default "User type must be user or manager";
 
     Class<?>[] groups() default {};
 

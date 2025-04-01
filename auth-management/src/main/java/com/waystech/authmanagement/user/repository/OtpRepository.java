@@ -1,13 +1,14 @@
-package org.partypal.userManagement.domain.repository;
+package com.waystech.authmanagement.user.repository;
 
-import org.partypal.userManagement.domain.models.Otp;
-import org.partypal.userManagement.domain.models.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.waystech.authmanagement.user.models.Otp;
+import com.waystech.authmanagement.user.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
+
+
 @Repository
-public interface OtpRepository extends MongoRepository<Otp, String> {
+public interface OtpRepository extends JpaRepository<Otp, String> {
     boolean existsByUser(User user);
     Otp findByUser(User user);
 

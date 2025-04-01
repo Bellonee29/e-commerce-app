@@ -1,18 +1,19 @@
-package org.partypal.userManagement.domain.services.verificationService;
+package com.waystech.authmanagement.user.services.verificationService;
 
-import org.partypal.userManagement.application.dto.PartyPalResponse;
-import org.partypal.userManagement.application.dto.request.VerificationRequest;
-import org.partypal.userManagement.application.dto.response.SignInResponse;
-import org.partypal.userManagement.application.dto.response.SignUpResponse;
+
+import com.waystech.authmanagement.user.dto.NovaResponse;
+import com.waystech.authmanagement.user.dto.request.VerificationRequest;
+import com.waystech.authmanagement.user.dto.response.SignInResponse;
+import com.waystech.authmanagement.user.dto.response.SignUpResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface VerificationService {
-    PartyPalResponse<SignInResponse> verifyRegistrationOTP(VerificationRequest verificationRequest);
+    NovaResponse<SignInResponse> verifyRegistrationOTP(VerificationRequest verificationRequest);
 
-    PartyPalResponse<SignUpResponse> verifyPasswordOTP(VerificationRequest request);
+    NovaResponse<SignUpResponse> verifyPasswordOTP(VerificationRequest request);
 
-    PartyPalResponse<String> resendRegistrationOTP(String email);
+    NovaResponse<String> resendRegistrationOTP(String email);
 
-    PartyPalResponse<String> resendPasswordOTP(String email);
+    NovaResponse<String> resendPasswordOTP(String email);
 }

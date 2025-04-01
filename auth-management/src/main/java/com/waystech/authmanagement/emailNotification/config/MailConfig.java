@@ -1,4 +1,4 @@
-package org.partypal.emailNotification.config;
+package com.waystech.authmanagement.emailNotification.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

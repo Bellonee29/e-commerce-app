@@ -1,6 +1,7 @@
-package org.partypal.commonModule.utils;
+package com.waystech.authmanagement.Utils;
 
-import org.partypal.eventManagement.common.exception.ParserException;
+
+import com.waystech.authmanagement.eventManagement.common.exception.ParserException;
 
 import java.sql.Time;
 import java.text.ParseException;

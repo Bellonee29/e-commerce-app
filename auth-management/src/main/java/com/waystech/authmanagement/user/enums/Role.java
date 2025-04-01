@@ -1,7 +1,7 @@
-package org.partypal.userManagement.domain.enums;
+package com.waystech.authmanagement.user.enums;
 
 public enum Role {
     USER,
-    PROMOTER,
+    MANAGER,
     ADMIN
 }

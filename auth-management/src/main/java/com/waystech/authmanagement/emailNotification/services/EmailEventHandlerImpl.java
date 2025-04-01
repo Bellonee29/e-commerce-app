@@ -1,14 +1,12 @@
-package org.partypal.emailNotification.services;
+package com.waystech.authmanagement.emailNotification.services;
 
 import com.google.gson.Gson;
+import com.waystech.authmanagement.emailNotification.events.*;
+import com.waystech.authmanagement.exceptions.classes.UserNotFoundException;
+import com.waystech.authmanagement.user.models.User;
+import com.waystech.authmanagement.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.partypal.commonModule.events.EventBus;
-import org.partypal.commonModule.exceptions.classes.UserNotFoundException;
-import org.partypal.emailNotification.events.*;
-import org.partypal.notificationManagement.domain.enums.EventSubjects;
-import org.partypal.userManagement.domain.models.User;
-import org.partypal.userManagement.domain.repository.UserRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 

@@ -1,17 +1,15 @@
-package org.partypal.emailNotification.events;
+package com.waystech.authmanagement.emailNotification.events;
 
+import com.waystech.authmanagement.Utils.DateUtils;
+import com.waystech.authmanagement.emailNotification.config.RestTemplateConfig;
+import com.waystech.authmanagement.emailNotification.models.SenderModel;
+import com.waystech.authmanagement.emailNotification.models.TransactionalEmail;
+import com.waystech.authmanagement.user.models.Otp;
+import com.waystech.authmanagement.user.models.User;
+import com.waystech.authmanagement.user.repository.OtpRepository;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.partypal.commonModule.events.Event;
-import org.partypal.commonModule.events.EventHandler;
-import org.partypal.commonModule.utils.DateUtils;
-import org.partypal.emailNotification.config.RestTemplateConfig;
-import org.partypal.emailNotification.models.SenderModel;
-import org.partypal.emailNotification.models.TransactionalEmail;
-import org.partypal.userManagement.domain.models.Otp;
-import org.partypal.userManagement.domain.models.User;
-import org.partypal.userManagement.domain.repository.OtpRepository;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;

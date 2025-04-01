@@ -1,4 +1,4 @@
-package org.partypal.userManagement.application.dto.response;
+package com.waystech.authmanagement.user.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

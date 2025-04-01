@@ -1,4 +1,4 @@
-package org.partypal.emailNotification.models;
+package com.waystech.authmanagement.emailNotification.models;
 
 import org.partypal.eventManagement.application.dto.response.EventResponse;
 

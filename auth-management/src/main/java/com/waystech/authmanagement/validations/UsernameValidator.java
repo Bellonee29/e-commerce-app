@@ -1,8 +1,8 @@
-package org.partypal.commonModule.validations;
+package com.waystech.authmanagement.validations;
 
+import com.waystech.authmanagement.exceptions.classes.CustomValidationException;
+import com.waystech.authmanagement.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.partypal.commonModule.exceptions.classes.CustomValidationException;
-import org.partypal.userManagement.domain.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,11 +1,11 @@
-package org.partypal.userManagement.application.dto.request;
+package com.waystech.authmanagement.user.dto.request;
 
+import com.waystech.authmanagement.validations.ValidPassword;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.partypal.commonModule.validations.ValidPassword;
 
 @AllArgsConstructor
 @Data

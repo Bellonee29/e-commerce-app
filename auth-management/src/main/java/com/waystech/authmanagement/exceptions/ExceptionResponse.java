@@ -1,4 +1,4 @@
-package org.partypal.commonModule.exceptions;
+package com.waystech.authmanagement.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

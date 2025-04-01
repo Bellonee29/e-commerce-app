@@ -1,7 +1,7 @@
-package org.partypal.emailNotification.events;
+package com.waystech.authmanagement.emailNotification.events;
 
-import org.partypal.commonModule.events.Event;
-import org.partypal.userManagement.domain.models.User;
+
+import com.waystech.authmanagement.user.models.User;
 
 public class EventCreatedMailEvent extends Event {
 

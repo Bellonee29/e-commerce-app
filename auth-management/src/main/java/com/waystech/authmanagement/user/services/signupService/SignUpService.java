@@ -1,11 +1,11 @@
-package org.partypal.userManagement.domain.services.signupService;
+package com.waystech.authmanagement.user.services.signupService;
 
-import org.partypal.userManagement.application.dto.PartyPalResponse;
-import org.partypal.userManagement.application.dto.request.SignUpRequest;
-import org.partypal.userManagement.application.dto.response.SignUpResponse;
+import com.waystech.authmanagement.user.dto.NovaResponse;
+import com.waystech.authmanagement.user.dto.request.SignUpRequest;
+import com.waystech.authmanagement.user.dto.response.SignUpResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface SignUpService {
-    PartyPalResponse<SignUpResponse> registerUser(SignUpRequest request);
+    NovaResponse<SignUpResponse> registerUser(SignUpRequest request);
 }

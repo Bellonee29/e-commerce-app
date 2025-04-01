@@ -1,4 +1,4 @@
-package org.partypal.commonModule.utils;
+package com.waystech.authmanagement.Utils;
 
 import java.util.Random;
 

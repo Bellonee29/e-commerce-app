@@ -1,13 +1,13 @@
-package org.partypal.userManagement.application.dto.request;
+package com.waystech.authmanagement.user.dto.request;
 
+import com.waystech.authmanagement.validations.ValidPassword;
+import com.waystech.authmanagement.validations.ValidUserType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.partypal.commonModule.validations.ValidPassword;
-import org.partypal.commonModule.validations.ValidUserType;
 
 @AllArgsConstructor
 @Data
@@ -27,6 +27,15 @@ public class SignUpRequest {
 
     @NotBlank(message = "Phone number must not be blank")
     private String phoneNumber;
+
+    @NotBlank(message = "Address must not be blank")
+    private String address;
+
+    @NotBlank(message = "State must not be blank")
+    private String state;
+
+    @NotBlank(message = "Country must not be blank")
+    private String country;
 
     @NotBlank(message = "Password must not be blank")
     @ValidPassword(message = "Password must be a strong password")

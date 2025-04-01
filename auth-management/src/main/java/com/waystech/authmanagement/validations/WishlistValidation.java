@@ -1,10 +1,9 @@
-package org.partypal.commonModule.validations;
+package com.waystech.authmanagement.validations;
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.waystech.authmanagement.exceptions.classes.UserUnauthorizedException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.partypal.commonModule.exceptions.classes.UserUnauthorizedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
